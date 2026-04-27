@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckSquare, Calendar, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
 
-import bulbGif from '../../assets/bulb-animation.gif';
+import bulbGif from '../../assets/support.gif';
 
 export default function ConsultationModal({ isOpen, onClose }) { 
   const navigate = useNavigate(); // 2. Initialize navigate

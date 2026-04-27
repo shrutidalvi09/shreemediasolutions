@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// 1. IMPORT YOUR ASSETS
-import bulbGif from '../../assets/bulb-animation.gif'; 
-import moneyGif from '../../assets/money-animation.gif'; 
-import rocketGif from '../../assets/rocket-animation.gif'; 
+// 1. ASSET IMPORTS - Ensure these filenames exist exactly in src/assets/
+import qualityGif from '../../assets/quality.gif'; 
+import truckGif from '../../assets/truck.gif'; 
+import supportGif from '../../assets/support.gif'; 
 import imgLarge from '../../assets/image_large.jpg'; 
 import imgSmall from '../../assets/image_small.jpg';
 
@@ -13,48 +13,36 @@ export default function AboutPreview() {
     <section className="relative py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-8 md:px-20">
         
-        {/* Top Feature Icons - Horizontal Layout with Large GIFs */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-32">
+        {/* --- SECTION HEADING --- */}
+        <div className="text-center mb-16">
+           <h2 className="text-4xl font-bold text-slate-900">Our Services</h2>
+        </div>
+
+        {/* --- SERVICE CARDS (Matches image_948880.jpg style) --- */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
           <FeatureItem 
-            icon={
-              <img 
-                src={bulbGif} 
-                alt="Growth" 
-                className="w-20 h-20 md:w-24 md:h-24 object-contain transition-transform duration-500 group-hover:scale-110" 
-              />
-            }
-            title="Grow your business"
-            desc="We believe in challenges and so we have made challenges."
+            icon={qualityGif}
+            title="Top Quality Print"
+            desc="Experience unmatched precision and vibrant results."
           />
           
           <FeatureItem 
-            icon={
-              <img 
-                src={moneyGif} 
-                alt="Savings" 
-                className="w-20 h-20 md:w-24 md:h-24 object-contain transition-transform duration-500 group-hover:scale-110" 
-              />
-            }
-            title="Cost savings ideas"
-            desc="We also help our clients with social media strategy."
+            icon={truckGif}
+            title="On-Time Delivery"
+            desc="We respect our commitment and fulfil all your orders on time."
           />
           
           <FeatureItem 
-            icon={
-              <img 
-                src={rocketGif} 
-                alt="Performance" 
-                className="w-20 h-20 md:w-24 md:h-24 object-contain transition-transform duration-500 group-hover:scale-110" 
-              />
-            }
-            title="Boost performance"
-            desc="We deliver email marketing campaigns to your audience."
+            icon={supportGif}
+            title="Exceptional Support"
+            desc="Best in industry support for our customers."
           />
         </div>
 
+        {/* --- BOTTOM COMPOSITION --- */}
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           
-          {/* Left Side: Image Composition with Overlap */}
+          {/* Overlapping Image Logic */}
           <div className="lg:w-1/2 relative">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
@@ -65,7 +53,7 @@ export default function AboutPreview() {
             >
               <img 
                 src={imgLarge} 
-                alt="Team working" 
+                alt="Main" 
                 className="rounded-xl shadow-2xl w-[88%] border border-slate-100"
               />
             </motion.div>
@@ -79,13 +67,13 @@ export default function AboutPreview() {
             >
               <img 
                 src={imgSmall} 
-                alt="Discussion" 
+                alt="Secondary" 
                 className="rounded-xl shadow-2xl border-[12px] border-white"
               />
             </motion.div>
           </div>
 
-          {/* Right Side: Content */}
+          {/* Business Content */}
           <div className="lg:w-1/2">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -93,7 +81,6 @@ export default function AboutPreview() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              {/* Creative Approach Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f0f4ff] mb-8">
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
                 <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.15em]">
@@ -110,62 +97,47 @@ export default function AboutPreview() {
                 We strive to develop real-world web solutions that are ideal for small to large projects with bespoke requirements.
               </p>
 
-              {/* CRAFTO STYLE PILL PROGRESS BARS */}
+              {/* Progress Pills */}
               <div className="flex flex-col gap-4 max-w-md">
-                
-                {/* Business Growth Pill */}
-                <div className="relative w-full h-9 bg-slate-100 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: '98%' }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, ease: "circOut" }}
-                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#ff5e57] to-[#ffaf40] flex items-center justify-between px-6"
-                  >
-                    <span className="text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">Business Growth</span>
-                    <span className="text-xs font-bold text-white">98%</span>
-                  </motion.div>
-                </div>
-
-                {/* New Technology Pill */}
-                <div className="relative w-full h-9 bg-slate-100 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: '85%' }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, ease: "circOut" }}
-                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#2980b9] to-[#6dd5fa] flex items-center justify-between px-6"
-                  >
-                    <span className="text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">New Technology</span>
-                    <span className="text-xs font-bold text-white">85%</span>
-                  </motion.div>
-                </div>
-
+                <ProgressBar label="Business Growth" targetWidth="98%" color="from-[#ff5e57] to-[#ffaf40]" />
+                <ProgressBar label="New Technology" targetWidth="85%" color="from-[#2980b9] to-[#6dd5fa]" />
               </div>
             </motion.div>
           </div>
-
         </div>
       </div>
     </section>
   );
 }
 
-// Helper Component for Feature Icons
 function FeatureItem({ icon, title, desc }) {
   return (
-    <div className="flex gap-4 items-center group cursor-default">
-      <div className="flex-shrink-0 flex items-center justify-center min-w-[100px]">
-        {icon}
+    <motion.div 
+      whileHover={{ y: -8 }}
+      className="flex flex-col items-center text-center p-12 bg-[#f8fbff] rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 group"
+    >
+      <div className="mb-8 flex items-center justify-center w-24 h-24 rounded-full bg-white shadow-xl group-hover:scale-110 transition-transform duration-500 border border-orange-50">
+        <img src={icon} alt={title} className="w-12 h-12 object-contain" />
       </div>
-      <div className="flex flex-col gap-1">
-        <h4 className="text-[20px] font-bold text-[#232323] leading-tight group-hover:text-blue-600 transition-colors">
-          {title}
-        </h4>
-        <p className="text-[15px] text-slate-500 leading-relaxed max-w-[200px]">
-          {desc}
-        </p>
-      </div>
+      <h4 className="text-[22px] font-bold text-[#232323] mb-4">{title}</h4>
+      <p className="text-[15px] text-slate-500 leading-relaxed px-4">{desc}</p>
+    </motion.div>
+  );
+}
+
+function ProgressBar({ label, targetWidth, color }) {
+  return (
+    <div className="relative w-full h-9 bg-slate-100 rounded-full overflow-hidden">
+      <motion.div 
+        initial={{ width: 0 }}
+        whileInView={{ width: targetWidth }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.5, ease: "circOut" }}
+        className={`absolute inset-y-0 left-0 bg-gradient-to-r ${color} flex items-center justify-between px-6`}
+      >
+        <span className="text-[10px] font-black text-white uppercase tracking-widest">{label}</span>
+        <span className="text-xs font-bold text-white">{targetWidth}</span>
+      </motion.div>
     </div>
   );
 }
