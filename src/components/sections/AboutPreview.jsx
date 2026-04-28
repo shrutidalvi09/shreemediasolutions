@@ -1,108 +1,162 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// 1. ASSET IMPORTS - Ensure these filenames exist exactly in src/assets/
+// ASSET IMPORTS
 import qualityGif from '../../assets/quality.gif'; 
 import truckGif from '../../assets/truck.gif'; 
 import supportGif from '../../assets/support.gif'; 
-import imgLarge from '../../assets/image_large.jpg'; 
-import imgSmall from '../../assets/image_small.jpg';
+
+import slide1 from '../../assets/banner1.jpg';
+import slide2 from '../../assets/flyer1.jpg';
+import slide3 from '../../assets/outdoor.jpg';
+import slide4 from '../../assets/poster1.jpg';
+import slide5 from '../../assets/poster.jpg';
+import slide6 from '../../assets/promotional.jpg';
+import slide7 from '../../assets/standy.avif';
+import slide8 from '../../assets/weeding.jpg';
+import slide9 from '../../assets/certificate.jpg';
+import slide10 from '../../assets/businesscard.jpg';
+import slide11 from '../../assets/flyer.webp';
+
+const slides = [
+  { img: slide1, label: "Wide Format Banners" },
+  { img: slide2, label: "Premium Flyers" },
+  { img: slide3, label: "Outdoor Advertising" },
+  { img: slide4, label: "Event Posters" },
+  { img: slide5, label: "Studio Prints" },
+  { img: slide6, label: "Promotional Media" },
+  { img: slide7, label: "Custom Standees" },
+  { img: slide8, label: "Wedding Stationery" },
+  { img: slide9, label: "Official Certificates" },
+  { img: slide10, label: "Business Branding" },
+  { img: slide11, label: "Creative Portfolio" },
+];
 
 export default function AboutPreview() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % slides.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="relative py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-8 md:px-20">
+    <section className="relative py-32 bg-[#FFFFFF] overflow-hidden selection:bg-orange-100 selection:text-orange-600">
+      {/* Dynamic Background Elements */}
+      <motion.div 
+        animate={{ 
+          x: [0, 30, 0], 
+          y: [0, -20, 0] 
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[120px] -z-10" 
+      />
+
+      <div className="container mx-auto px-6 lg:px-20 relative z-10">
         
-        {/* --- SECTION HEADING --- */}
-        <div className="text-center mb-16">
-           <h2 className="text-4xl font-bold text-slate-900">Our Services</h2>
+        {/* --- ENHANCED HEADER --- */}
+        <div className="max-w-5xl mb-24">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="flex items-center gap-4 mb-8"
+          >
+            <span className="h-[2px] w-12 bg-orange-500" />
+            <span className="text-orange-600 font-bold tracking-[0.3em] text-[10px] uppercase">
+              The Shree Media Experience
+            </span>
+          </motion.div>
+          
+          <div className="overflow-hidden">
+            <motion.h2 
+              initial={{ y: "100%" }}
+              whileInView={{ y: 0 }}
+              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+              className="text-6xl md:text-[5.5rem] font-medium text-slate-900 leading-[0.95] tracking-tighter"
+            >
+              We craft <span className="font-bold">physical assets</span> <br /> 
+              that define <span className="italic text-slate-300 font-light underline decoration-orange-500/30 underline-offset-8">your legacy.</span>
+            </motion.h2>
+          </div>
         </div>
 
-        {/* --- SERVICE CARDS (Matches image_948880.jpg style) --- */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
-          <FeatureItem 
-            icon={qualityGif}
-            title="Top Quality Print"
-            desc="Experience unmatched precision and vibrant results."
-          />
-          
-          <FeatureItem 
-            icon={truckGif}
-            title="On-Time Delivery"
-            desc="We respect our commitment and fulfil all your orders on time."
-          />
-          
-          <FeatureItem 
-            icon={supportGif}
-            title="Exceptional Support"
-            desc="Best in industry support for our customers."
-          />
+        {/* --- INTERACTIVE CARDS --- */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-40">
+          <FeatureItem icon={qualityGif} title="Bespoke Quality" desc="Meticulous attention to every fiber and pixel." delay={0.1} />
+          <FeatureItem icon={truckGif} title="Rapid Delivery" desc="Global logistics powered by local precision." delay={0.2} />
+          <FeatureItem icon={supportGif} title="Design Logic" desc="Strategic consulting for modern visual brands." delay={0.3} />
         </div>
 
-        {/* --- BOTTOM COMPOSITION --- */}
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+        {/* --- DYNAMIC SLIDESHOW WITH CONTEXT --- */}
+        <div className="flex flex-col lg:flex-row gap-24 items-center">
           
-          {/* Overlapping Image Logic */}
-          <div className="lg:w-1/2 relative">
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative z-10"
-            >
-              <img 
-                src={imgLarge} 
-                alt="Main" 
-                className="rounded-xl shadow-2xl w-[88%] border border-slate-100"
-              />
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="absolute -bottom-8 right-4 z-20 w-[52%]"
-            >
-              <img 
-                src={imgSmall} 
-                alt="Secondary" 
-                className="rounded-xl shadow-2xl border-[12px] border-white"
-              />
-            </motion.div>
+          <div className="lg:w-3/5 w-full relative group">
+            {/* The Main Container */}
+            <div className="relative aspect-[16/10] rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] bg-slate-50 border border-slate-100">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={index}
+                  src={slides[index].img}
+                  initial={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                  transition={{ duration: 1, ease: "circOut" }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  alt="Portfolio Showcase"
+                />
+              </AnimatePresence>
+
+              {/* Floating Slide Label */}
+              <motion.div 
+                key={`label-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute top-8 left-8 bg-white/80 backdrop-blur-md px-6 py-3 rounded-full shadow-sm border border-white/50 z-20"
+              >
+                <p className="text-[10px] font-black uppercase tracking-widest text-orange-600 mb-0.5">Current Category</p>
+                <p className="text-sm font-bold text-slate-800">{slides[index].label}</p>
+              </motion.div>
+
+              {/* Custom Navigation dots */}
+              <div className="absolute bottom-8 right-8 flex gap-3 z-20">
+                {slides.map((_, i) => (
+                  <button 
+                    key={i}
+                    onClick={() => setIndex(i)}
+                    className={`h-1.5 rounded-full transition-all duration-500 ${i === index ? "w-10 bg-white" : "w-2 bg-white/30 hover:bg-white/60"}`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Business Content */}
-          <div className="lg:w-1/2">
-            <motion.div
+          <div className="lg:w-2/5 space-y-12">
+            <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-8"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f0f4ff] mb-8">
-                <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
-                <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.15em]">
-                  Creative Approach
-                </span>
-              </div>
-              
-              <h2 className="text-5xl md:text-6xl font-bold text-slate-900 leading-[1.1] tracking-tight mb-8">
-                Powerful agency for <br /> 
-                <span className="text-slate-400">corporate business.</span>
-              </h2>
-              
-              <p className="text-slate-500 text-lg mb-12 leading-relaxed font-light max-w-lg">
-                We strive to develop real-world web solutions that are ideal for small to large projects with bespoke requirements.
+              <h3 className="text-4xl font-bold text-slate-900 tracking-tight leading-tight">
+                High-fidelity results <br /> 
+                for <span className="text-orange-500">high-impact</span> brands.
+              </h3>
+              <p className="text-slate-500 text-xl leading-relaxed font-light">
+                Our workshop is a sanctuary for quality. We bridge the gap between digital concepts and tangible masterpieces using high-grade materials.
               </p>
-
-              {/* Progress Pills */}
-              <div className="flex flex-col gap-4 max-w-md">
-                <ProgressBar label="Business Growth" targetWidth="98%" color="from-[#ff5e57] to-[#ffaf40]" />
-                <ProgressBar label="New Technology" targetWidth="85%" color="from-[#2980b9] to-[#6dd5fa]" />
-              </div>
             </motion.div>
+
+            <div className="grid grid-cols-2 gap-8">
+              <StatBox count="99%" label="Accuracy" />
+              <StatBox count="15k+" label="Deliveries" />
+            </div>
+
+            <button className="group flex items-center gap-4 bg-slate-900 text-white px-8 py-5 rounded-2xl font-bold hover:bg-orange-600 transition-all duration-500 shadow-xl shadow-slate-200">
+              Explore Our Portfolio
+              <span className="w-8 h-[1px] bg-white group-hover:w-12 transition-all duration-500" />
+            </button>
           </div>
         </div>
       </div>
@@ -110,34 +164,33 @@ export default function AboutPreview() {
   );
 }
 
-function FeatureItem({ icon, title, desc }) {
+function FeatureItem({ icon, title, desc, delay }) {
   return (
     <motion.div 
-      whileHover={{ y: -8 }}
-      className="flex flex-col items-center text-center p-12 bg-[#f8fbff] rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 group"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay }}
+      whileHover={{ y: -15 }}
+      className="p-12 bg-white rounded-[3rem] border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] transition-all duration-700 relative overflow-hidden group"
     >
-      <div className="mb-8 flex items-center justify-center w-24 h-24 rounded-full bg-white shadow-xl group-hover:scale-110 transition-transform duration-500 border border-orange-50">
-        <img src={icon} alt={title} className="w-12 h-12 object-contain" />
+      <div className="relative z-10">
+        <div className="mb-10 w-20 h-20 rounded-3xl bg-slate-50 flex items-center justify-center group-hover:bg-orange-500 group-hover:rotate-[10deg] transition-all duration-500 shadow-inner">
+          <img src={icon} alt={title} className="w-10 h-10 object-contain group-hover:brightness-0 group-hover:invert transition-all duration-500" />
+        </div>
+        <h4 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">{title}</h4>
+        <p className="text-slate-400 text-base leading-relaxed font-light">{desc}</p>
       </div>
-      <h4 className="text-[22px] font-bold text-[#232323] mb-4">{title}</h4>
-      <p className="text-[15px] text-slate-500 leading-relaxed px-4">{desc}</p>
+      {/* Subtle Background Accent on hover */}
+      <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-orange-50 rounded-full group-hover:scale-[3] transition-transform duration-1000 -z-0" />
     </motion.div>
   );
 }
 
-function ProgressBar({ label, targetWidth, color }) {
+function StatBox({ count, label }) {
   return (
-    <div className="relative w-full h-9 bg-slate-100 rounded-full overflow-hidden">
-      <motion.div 
-        initial={{ width: 0 }}
-        whileInView={{ width: targetWidth }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, ease: "circOut" }}
-        className={`absolute inset-y-0 left-0 bg-gradient-to-r ${color} flex items-center justify-between px-6`}
-      >
-        <span className="text-[10px] font-black text-white uppercase tracking-widest">{label}</span>
-        <span className="text-xs font-bold text-white">{targetWidth}</span>
-      </motion.div>
+    <div className="border-l-2 border-slate-100 pl-6 space-y-1">
+      <p className="text-3xl font-black text-slate-900">{count}</p>
+      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{label}</p>
     </div>
   );
 }

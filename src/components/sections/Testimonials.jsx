@@ -1,106 +1,137 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Quote } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Star } from 'lucide-react';
 
 const testimonials = [
   {
-    name: "Rahul Mehta",
-    role: "Founder, TechStart",
-    feedback: "NEXGENICS helped us streamline operations and reduce costs significantly. .",
-    initials: "RM",
-    color: "from-blue-600 to-indigo-600"
+    name: "Priya S.",
+    location: "Mumbai",
+    feedback: "Loved the customization options. Super easy to design and order!",
+    image: "https://i.pravatar.cc/150?u=priya"
   },
   {
-    name: "Priya Sharma",
-    role: "CEO, Nexa",
-    feedback: "Their solutions transformed our workflow.",
-    initials: "PS",
-    color: "from-slate-800 to-slate-950"
+    name: "Rohit M.",
+    location: "Delhi",
+    feedback: "Exceptional quality and fast delivery! My business cards turned out perfect.",
+    image: "https://i.pravatar.cc/150?u=rohit"
   },
-  
+  {
+    name: "Amit R.",
+    location: "Bangalore",
+    feedback: "Great service, timely updates, and amazing product range. Highly recommend!",
+    image: "https://i.pravatar.cc/150?u=amit"
+  },
+  {
+    name: "Sneha K.",
+    location: "Pune",
+    feedback: "The colors are so vibrant! Shree Media really knows their print tech.",
+    image: "https://i.pravatar.cc/150?u=sneha"
+  }
 ];
 
-const AUTO_PLAY_DURATION = 4000; // 6 seconds per slide
+export default function FocusedCarousel() {
+  const [centerIndex, setCenterIndex] = useState(1);
 
-export default function Testimonials() {
-  const [current, setCurrent] = useState(0);
+  const nextSlide = () => setCenterIndex((prev) => (prev + 1) % testimonials.length);
+  const prevSlide = () => setCenterIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % testimonials.length);
-    }, AUTO_PLAY_DURATION);
+  // Helper to get the 3 visible items based on center index
+  const getVisibleIndices = () => {
+    const prev = (centerIndex - 1 + testimonials.length) % testimonials.length;
+    const next = (centerIndex + 1) % testimonials.length;
+    return [prev, centerIndex, next];
+  };
 
-    return () => clearInterval(timer);
-  }, []);
+  const visibleIndices = getVisibleIndices();
 
   return (
-    <section className="py-32 bg-white overflow-hidden border-t border-slate-50">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-32">
+    <section className="py-20 bg-[#FDFCFD] overflow-hidden">
+      <div className="container mx-auto px-4">
+        
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-slate-900 mb-4">Real Stories</h2>
+          <p className="text-slate-500 max-w-2xl mx-auto text-sm leading-relaxed">
+            Discover how Shree Media has helped businesses and individuals bring their 
+            ideas to life with quality, speed, and care.
+          </p>
+        </div>
+
+        {/* Carousel Container */}
+        <div className="relative flex items-center justify-center gap-4 max-w-6xl mx-auto">
           
-          {/* Left Side: Editorial Content */}
-          <div className="lg:w-2/5">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="w-12 h-[1.5px] bg-blue-600"></span>
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600">Client Success</span>
-            </div>
-            
-            <h2 className="text-5xl lg:text-7xl font-bold text-slate-950 leading-[1.05] mb-10 tracking-tight">
-              Trusted by <br />
-              <span className="text-slate-400 font-light italic">global founders.</span>
-            </h2>
-            
-            {/* Professional Progress Indicators */}
-            <div className="flex gap-4 mt-12">
-              {testimonials.map((_, index) => (
-                <div key={index} className="h-1 w-12 bg-slate-100 rounded-full overflow-hidden relative">
-                  {current === index && (
-                    <motion.div 
-                      initial={{ width: 0 }}
-                      animate={{ width: "100%" }}
-                      transition={{ duration: AUTO_PLAY_DURATION / 1000, ease: "linear" }}
-                      className="absolute top-0 left-0 h-full bg-blue-600"
-                    />
-                  )}
-                  {index < current && <div className="absolute inset-0 bg-blue-600 opacity-30" />}
-                </div>
-              ))}
-            </div>
+          {/* Left Button */}
+          <button 
+            onClick={prevSlide}
+            className="absolute left-0 z-20 p-3 rounded-full border border-pink-200 text-pink-500 hover:bg-pink-50 transition-colors bg-white shadow-sm md:-left-4"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          {/* Cards Wrapper */}
+          <div className="flex items-center justify-center gap-6 w-full">
+            {visibleIndices.map((idx, position) => {
+              const isCenter = position === 1;
+              return (
+                <motion.div
+                  key={`${idx}-${position}`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ 
+                    opacity: isCenter ? 1 : 0.6, 
+                    scale: isCenter ? 1.05 : 0.9,
+                    zIndex: isCenter ? 10 : 0 
+                  }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className={`bg-white rounded-2xl p-8 border border-slate-100 shadow-xl shadow-slate-200/50 flex flex-col items-center text-center w-full max-w-[350px] min-h-[400px] ${!isCenter && 'hidden md:flex'}`}
+                >
+                  {/* Profile Image */}
+                  <div className="w-24 h-24 rounded-full overflow-hidden mb-6 border-4 border-slate-50 shadow-inner">
+                    <img src={testimonials[idx].image} alt={testimonials[idx].name} className="w-full h-full object-cover" />
+                  </div>
+
+                  {/* Stars */}
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={18} className="fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+
+                  {/* Feedback */}
+                  <p className="text-slate-600 text-base leading-relaxed mb-8 flex-grow">
+                    {testimonials[idx].feedback}
+                  </p>
+
+                  {/* Footer */}
+                  <div className="mt-auto">
+                    <span className="font-bold text-slate-800 text-lg">
+                      — {testimonials[idx].name}, {testimonials[idx].location}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
-          {/* Right Side: The Display */}
-          <div className="lg:w-3/5 relative w-full min-h-[450px] flex items-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="relative z-10 w-full"
-              >
-                {/* Massive Decorative Quote Icon */}
-                <Quote size={180} strokeWidth={0.5} className="absolute -top-16 -left-12 text-slate-100/80 -z-10" />
-                
-                <blockquote className="text-3xl md:text-4xl font-medium text-slate-800 leading-[1.4] mb-14 tracking-tight max-w-2xl">
-                  "{testimonials[current].feedback}"
-                </blockquote>
+          {/* Right Button */}
+          <button 
+            onClick={nextSlide}
+            className="absolute right-0 z-20 p-3 rounded-full bg-purple-600 text-white hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200 md:-right-4"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
 
-                <div className="flex items-center gap-6">
-                  <div className={`w-16 h-16 rounded-[1.3rem] bg-gradient-to-br ${testimonials[current].color} flex items-center justify-center text-white font-bold text-2xl shadow-2xl shadow-blue-500/20`}>
-                    {testimonials[current].initials}
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-slate-950">{testimonials[current].name}</h4>
-                    <p className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.25em] mt-1.5">{testimonials[current].role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            <div className="absolute -right-10 -bottom-10 w-96 h-96 bg-blue-50/60 rounded-full blur-[120px] -z-10" />
-          </div>
-
+        {/* Pagination Dots */}
+        <div className="flex justify-center gap-2 mt-12">
+          {testimonials.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCenterIndex(i)}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                centerIndex === i ? 'w-8 bg-blue-500' : 'w-2.5 bg-slate-200'
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>
