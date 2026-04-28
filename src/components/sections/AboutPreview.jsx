@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
-// ASSET IMPORTS
+// 1. ASSET IMPORTS (Ensure these paths match your project structure)
 import qualityGif from '../../assets/quality.gif'; 
 import truckGif from '../../assets/truck.gif'; 
 import supportGif from '../../assets/support.gif'; 
@@ -43,29 +44,31 @@ export default function AboutPreview() {
   }, []);
 
   return (
-    <section className="relative py-32 bg-[#FFFFFF] overflow-hidden selection:bg-orange-100 selection:text-orange-600">
-      {/* Dynamic Background Elements */}
-      <motion.div 
-        animate={{ 
-          x: [0, 30, 0], 
-          y: [0, -20, 0] 
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[120px] -z-10" 
-      />
+    <section className="relative py-32 bg-[#fcfcfd] overflow-hidden selection:bg-indigo-100 selection:text-indigo-600">
+      
+      {/* BACKGROUND AMBIENCE */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <motion.div 
+          animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute top-40 right-1/4 w-[600px] h-[600px] bg-indigo-50/60 rounded-full blur-[140px]" 
+        />
+        <div className="absolute bottom-20 left-10 w-[400px] h-[400px] bg-purple-50/50 rounded-full blur-[120px]" />
+      </div>
 
       <div className="container mx-auto px-6 lg:px-20 relative z-10">
         
-        {/* --- ENHANCED HEADER --- */}
+        {/* --- SECTION HEADER --- */}
         <div className="max-w-5xl mb-24">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
             className="flex items-center gap-4 mb-8"
           >
-            <span className="h-[2px] w-12 bg-orange-500" />
-            <span className="text-orange-600 font-bold tracking-[0.3em] text-[10px] uppercase">
-              The Shree Media Experience
+            <span className="h-[1px] w-12 bg-indigo-500" />
+            <span className="text-indigo-600 font-black tracking-[0.3em] text-[10px] uppercase">
+              The Shree Media Standard
             </span>
           </motion.div>
           
@@ -73,89 +76,106 @@ export default function AboutPreview() {
             <motion.h2 
               initial={{ y: "100%" }}
               whileInView={{ y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-              className="text-6xl md:text-[5.5rem] font-medium text-slate-900 leading-[0.95] tracking-tighter"
+              className="text-5xl md:text-[5rem] font-black text-slate-900 leading-[1.1] tracking-tighter"
             >
-              We craft <span className="font-bold">physical assets</span> <br /> 
-              that define <span className="italic text-slate-300 font-light underline decoration-orange-500/30 underline-offset-8">your legacy.</span>
+              We craft <span className="italic font-light text-slate-400 underline decoration-indigo-500/20 underline-offset-8">physical assets</span> <br /> 
+              that define your <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500">brand legacy.</span>
             </motion.h2>
           </div>
         </div>
 
-        {/* --- INTERACTIVE CARDS --- */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-40">
-          <FeatureItem icon={qualityGif} title="Bespoke Quality" desc="Meticulous attention to every fiber and pixel." delay={0.1} />
-          <FeatureItem icon={truckGif} title="Rapid Delivery" desc="Global logistics powered by local precision." delay={0.2} />
-          <FeatureItem icon={supportGif} title="Design Logic" desc="Strategic consulting for modern visual brands." delay={0.3} />
+        {/* --- FEATURE GRID --- */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40">
+          <FeatureItem 
+            icon={qualityGif} 
+            title="Bespoke Quality" 
+            desc="Meticulous attention to every fiber and pixel." 
+            delay={0.1} 
+          />
+          <FeatureItem 
+            icon={truckGif} 
+            title="Rapid Delivery" 
+            desc="Global logistics powered by local precision." 
+            delay={0.2} 
+          />
+          <FeatureItem 
+            icon={supportGif} 
+            title="Design Logic" 
+            desc="Strategic consulting for modern visual brands." 
+            delay={0.3} 
+          />
         </div>
 
-        {/* --- DYNAMIC SLIDESHOW WITH CONTEXT --- */}
-        <div className="flex flex-col lg:flex-row gap-24 items-center">
+        {/* --- SHOWCASE & STATS --- */}
+        <div className="flex flex-col lg:flex-row gap-20 items-center">
           
-          <div className="lg:w-3/5 w-full relative group">
-            {/* The Main Container */}
-            <div className="relative aspect-[16/10] rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] bg-slate-50 border border-slate-100">
+          {/* Slideshow with Studio-Style Frame */}
+          <div className="lg:w-3/5 w-full relative">
+            <div className="relative aspect-[16/10] rounded-[3rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.08)] bg-white border-[8px] border-white">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={index}
                   src={slides[index].img}
-                  initial={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
+                  initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
                   animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
-                  transition={{ duration: 1, ease: "circOut" }}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+                  transition={{ duration: 0.8, ease: "circOut" }}
+                  className="absolute inset-0 w-full h-full object-cover rounded-[1.5rem]"
                   alt="Portfolio Showcase"
                 />
               </AnimatePresence>
 
-              {/* Floating Slide Label */}
+              {/* Floating Glass Tag */}
               <motion.div 
                 key={`label-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="absolute top-8 left-8 bg-white/80 backdrop-blur-md px-6 py-3 rounded-full shadow-sm border border-white/50 z-20"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="absolute top-8 left-8 bg-white/70 backdrop-blur-xl px-6 py-3 rounded-2xl shadow-xl border border-white/50 z-20"
               >
-                <p className="text-[10px] font-black uppercase tracking-widest text-orange-600 mb-0.5">Current Category</p>
+                <p className="text-[9px] font-black uppercase tracking-widest text-indigo-600 mb-0.5">Category</p>
                 <p className="text-sm font-bold text-slate-800">{slides[index].label}</p>
               </motion.div>
 
-              {/* Custom Navigation dots */}
+              {/* Progress Dots */}
               <div className="absolute bottom-8 right-8 flex gap-3 z-20">
                 {slides.map((_, i) => (
                   <button 
                     key={i}
                     onClick={() => setIndex(i)}
-                    className={`h-1.5 rounded-full transition-all duration-500 ${i === index ? "w-10 bg-white" : "w-2 bg-white/30 hover:bg-white/60"}`}
+                    className={`h-1.5 rounded-full transition-all duration-500 ${i === index ? "w-10 bg-indigo-600" : "w-2 bg-slate-900/10 hover:bg-slate-900/30"}`}
                   />
                 ))}
               </div>
             </div>
           </div>
 
+          {/* Text Content & Stats */}
           <div className="lg:w-2/5 space-y-12">
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
               className="space-y-8"
             >
-              <h3 className="text-4xl font-bold text-slate-900 tracking-tight leading-tight">
+              <h3 className="text-4xl font-black text-slate-900 tracking-tight leading-tight">
                 High-fidelity results <br /> 
-                for <span className="text-orange-500">high-impact</span> brands.
+                for <span className="text-indigo-600">high-impact</span> brands.
               </h3>
-              <p className="text-slate-500 text-xl leading-relaxed font-light">
-                Our workshop is a sanctuary for quality. We bridge the gap between digital concepts and tangible masterpieces using high-grade materials.
+              <p className="text-slate-500 text-xl leading-relaxed font-medium">
+                Our workshop is a sanctuary for quality. We bridge the gap between digital concepts and tangible masterpieces.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-2 gap-8 border-t border-slate-100 pt-10">
               <StatBox count="99%" label="Accuracy" />
               <StatBox count="15k+" label="Deliveries" />
             </div>
 
-            <button className="group flex items-center gap-4 bg-slate-900 text-white px-8 py-5 rounded-2xl font-bold hover:bg-orange-600 transition-all duration-500 shadow-xl shadow-slate-200">
-              Explore Our Portfolio
-              <span className="w-8 h-[1px] bg-white group-hover:w-12 transition-all duration-500" />
+            <button className="group flex items-center gap-4 bg-slate-950 text-white px-10 py-5 rounded-full font-bold hover:bg-indigo-600 transition-all duration-500 shadow-2xl shadow-indigo-100">
+              Explore Portfolio
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </button>
           </div>
         </div>
@@ -164,33 +184,35 @@ export default function AboutPreview() {
   );
 }
 
+// Sub-component for Features
 function FeatureItem({ icon, title, desc, delay }) {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.8, delay }}
-      whileHover={{ y: -15 }}
-      className="p-12 bg-white rounded-[3rem] border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] transition-all duration-700 relative overflow-hidden group"
+      whileHover={{ y: -10 }}
+      className="p-12 bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_80px_rgba(99,102,241,0.08)] transition-all duration-700 relative overflow-hidden group"
     >
       <div className="relative z-10">
-        <div className="mb-10 w-20 h-20 rounded-3xl bg-slate-50 flex items-center justify-center group-hover:bg-orange-500 group-hover:rotate-[10deg] transition-all duration-500 shadow-inner">
+        <div className="mb-10 w-20 h-20 rounded-3xl bg-slate-50 flex items-center justify-center group-hover:bg-indigo-600 group-hover:rotate-[10deg] transition-all duration-500 shadow-inner">
           <img src={icon} alt={title} className="w-10 h-10 object-contain group-hover:brightness-0 group-hover:invert transition-all duration-500" />
         </div>
-        <h4 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">{title}</h4>
-        <p className="text-slate-400 text-base leading-relaxed font-light">{desc}</p>
+        <h4 className="text-2xl font-black text-slate-800 mb-4 tracking-tight">{title}</h4>
+        <p className="text-slate-400 text-base leading-relaxed font-medium">{desc}</p>
       </div>
-      {/* Subtle Background Accent on hover */}
-      <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-orange-50 rounded-full group-hover:scale-[3] transition-transform duration-1000 -z-0" />
+      <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-indigo-50 rounded-full group-hover:scale-[3] transition-transform duration-1000 -z-0" />
     </motion.div>
   );
 }
 
+// Sub-component for Stats
 function StatBox({ count, label }) {
   return (
-    <div className="border-l-2 border-slate-100 pl-6 space-y-1">
-      <p className="text-3xl font-black text-slate-900">{count}</p>
-      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{label}</p>
+    <div className="space-y-1">
+      <p className="text-4xl font-black text-slate-900 tracking-tighter">{count}</p>
+      <p className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">{label}</p>
     </div>
   );
 }

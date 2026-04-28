@@ -1,22 +1,30 @@
 ﻿import React from 'react';
 import ServicesHero from '../components/sections/ServicesHero';
-import ServicesGrid from '../components/sections/Servicessectionpage'; 
-import WhyJoinUs from '../components/sections/WhyJoinUs'; // 
+import ServiceCategories from '../components/sections/ServiceCategories';
+import ProjectShowcase from '../components/sections/ProjectShowcase'; // NEW
+import StrategySection from '../components/sections/StrategySection'; // NEW
 import TechMarquee from '../components/sections/TechMarquee';
-import WorkProcess from '../components/sections/WorkProcess';
 import CTASection from '../components/sections/CTASection';
 
-const Services = () => {
+export default function Services() {
   return (
-    <main className="bg-white"> 
-      <ServicesHero />
-      <ServicesGrid />
-      <WhyJoinUs/>  
-      <WorkProcess />   
-      <TechMarquee />    
+    <main className="bg-white overflow-x-hidden"> 
+      <div className="relative">
+        <ServicesHero />
+        {/* Absolute positioning to pull categories onto the blue wave */}
+        <div className="relative -mt-28 z-40">
+          <ServiceCategories />
+        </div>
+      </div>
+
+      <ProjectShowcase />
+      <StrategySection />
+      
+      <div className="bg-[#1a1a1a] py-4">
+        <TechMarquee />
+      </div>
+
       <CTASection />   
     </main>
   );
-};
-
-export default Services;
+}

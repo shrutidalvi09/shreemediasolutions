@@ -1,32 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const techs = [
-  "Finance & Banking", "Healthcare", "E-commerce", "Startups & SMEs", 
-  "Technology & SaaS"
-];
-
 export default function TechMarquee() {
+  const items = ["Digital Printing", "Offset Printing", "3D Printing", "Flyers", "Branding"];
+  
   return (
-    <div className="py-16 bg-white border-y border-slate-100 overflow-hidden">
-      <div className="flex whitespace-nowrap">
-        <motion.div 
-          initial={{ x: 0 }}
-          animate={{ x: "-50%" }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="flex gap-16 items-center px-8"
-        >
-          {/* Render twice for seamless loop */}
-          {[...techs, ...techs].map((tech, index) => (
-            <span 
-              key={index} 
-              className="text-slate-200 text-4xl font-black uppercase tracking-tighter hover:text-blue-600 transition-colors duration-300 cursor-default select-none"
-            >
-              {tech}
-            </span>
-          ))}
-        </motion.div>
-      </div>
+    <div className="bg-[#1a1a1a] py-16 overflow-hidden">
+      <motion.div 
+        animate={{ x: [0, -1000] }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        className="flex gap-20 whitespace-nowrap"
+      >
+        {[...items, ...items].map((text, i) => (
+          <span 
+            key={i} 
+            className="text-6xl font-black uppercase tracking-tighter text-transparent"
+            style={{ WebkitTextStroke: '1px rgba(255,255,255,0.1)' }}
+          >
+            {text} <span className="ml-20 opacity-20">/</span>
+          </span>
+        ))}
+      </motion.div>
     </div>
   );
 }
