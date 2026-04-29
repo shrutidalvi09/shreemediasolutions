@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom' // Added useNavigate
 import { 
   ChevronDown, 
   PlayCircle, 
   Menu, 
   X,
   ArrowRight,
-  Globe
+  Globe,
+  User // Added User icon for the login button
 } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -20,9 +21,9 @@ const navLinks = [
 export default function IntegratedHeader() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const navigate = useNavigate(); // Hook for programmatic navigation
 
   useEffect(() => {
-    // We trigger the scroll effect a bit later to let the hero breathe
     const handleScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -32,13 +33,13 @@ export default function IntegratedHeader() {
     <header 
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out ${
         scrolled 
-          ? 'py-3 bg-[#0a0f1c]/70 backdrop-blur-xl border-b border-white/10 shadow-xl' 
+          ? 'py-3 bg-[#0a0f1c]/80 backdrop-blur-xl border-b border-white/10 shadow-xl' 
           : 'py-6 bg-transparent border-b border-transparent'
       }`}
     >
       <nav className="max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between">
         
-        {/* 1. Brand Logo - More Compact */}
+        {/* 1. Brand Logo */}
         <Link to="/" className="flex-shrink-0 group">
           <div className="flex items-center gap-2.5">
             <div className={`relative p-2 rounded-xl transition-all duration-500 ${
@@ -74,7 +75,6 @@ export default function IntegratedHeader() {
                 <>
                   <span className="flex items-center gap-1 relative z-10">
                     {link.label}
-                    {link.hasDropdown && <ChevronDown className="w-3 h-3 group-hover:rotate-180 transition-transform" />}
                   </span>
                   {isActive && (
                     <motion.div 
@@ -94,17 +94,18 @@ export default function IntegratedHeader() {
         {/* 3. CTA Cluster */}
         <div className="flex items-center gap-4">
           
-
-          <Link 
-            to="/get-started" 
-            className={`text-[13px] font-bold px-6 py-2.5 rounded-full transition-all duration-300 ${
+          {/* UPDATED LOGIN BUTTON */}
+          <button 
+            onClick={() => navigate('/Login')} 
+            className={`flex items-center gap-2 text-[13px] font-black uppercase tracking-widest px-7 py-3 rounded-full transition-all duration-500 transform active:scale-95 ${
               scrolled 
-                ? 'bg-white text-slate-900 hover:bg-indigo-500 hover:text-white' 
-                : 'bg-indigo-600 text-white hover:bg-slate-900 shadow-lg shadow-indigo-200'
+                ? 'bg-white text-slate-900 hover:bg-indigo-600 hover:text-white' 
+                : 'bg-indigo-600 text-white hover:bg-slate-900 shadow-xl shadow-indigo-200'
             }`}
           >
-            Login
-          </Link>
+            <User size={14} strokeWidth={3} />
+            Log in
+          </button>
 
           <button 
             className={`lg:hidden p-2.5 rounded-xl transition-all ${
@@ -133,15 +134,23 @@ export default function IntegratedHeader() {
                 <Link 
                   key={link.to}
                   to={link.to} 
-                  className={`text-2xl font-bold ${scrolled ? 'text-white/80' : 'text-slate-900'}`}
+                  className={`text-2xl font-black tracking-tight ${scrolled ? 'text-white/80 hover:text-indigo-400' : 'text-slate-900 hover:text-indigo-600'}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Link to="/get-started" className="w-full py-4 bg-indigo-600 text-white text-center rounded-2xl font-bold">
-                Get Started
-              </Link>
+              
+              {/* Mobile Login Button */}
+              <button 
+                onClick={() => {
+                  navigate('/login');
+                  setMobileMenuOpen(false);
+                }} 
+                className="w-full py-4 bg-indigo-600 text-white text-center rounded-2xl font-black uppercase tracking-widest text-[12px]"
+              >
+                Account Login
+              </button>
             </div>
           </motion.div>
         )}

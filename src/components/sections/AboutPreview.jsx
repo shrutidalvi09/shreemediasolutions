@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 // 1. ASSET IMPORTS (Ensure these paths match your project structure)
 import qualityGif from '../../assets/quality.gif'; 
@@ -169,14 +170,18 @@ export default function AboutPreview() {
             </motion.div>
 
             <div className="grid grid-cols-2 gap-8 border-t border-slate-100 pt-10">
-              <StatBox count="99%" label="Accuracy" />
-              <StatBox count="15k+" label="Deliveries" />
-            </div>
+  <StatBox count="99%" label="Accuracy" />
+  <StatBox count="15k+" label="Deliveries" />
+</div>
 
-            <button className="group flex items-center gap-4 bg-slate-950 text-white px-10 py-5 rounded-full font-bold hover:bg-indigo-600 transition-all duration-500 shadow-2xl shadow-indigo-100">
-              Explore Products
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-            </button>
+{/* Added mt-10 for vertical gap and inline-block to ensure the Link wraps the button correctly */}
+<Link title="Explore Our Products" to="/services" className="inline-block mt-10">
+  <button className="group flex items-center gap-4 bg-slate-950 text-white px-10 py-5 rounded-full font-bold hover:bg-indigo-600 transition-all duration-500 shadow-2xl shadow-indigo-100">
+    Explore Products
+    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+  </button>
+</Link>
+            
           </div>
         </div>
       </div>

@@ -38,9 +38,7 @@ export default function BlogHero() {
               </p>
 
               {/* CTA */}
-              <button className="px-6 py-3 bg-white text-slate-900 rounded-full font-semibold hover:bg-slate-200 transition">
-                Explore Articles
-              </button>
+              
             </motion.div>
 
           </div>

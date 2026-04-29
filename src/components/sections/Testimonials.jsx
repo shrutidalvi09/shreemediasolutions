@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useCallback } from 'react'; // Added useEffect and useCallback
+import { motion } from 'framer-motion';
 import { ChevronRight, ChevronLeft, Star } from 'lucide-react';
 
 const testimonials = [
@@ -31,11 +31,28 @@ const testimonials = [
 
 export default function FocusedCarousel() {
   const [centerIndex, setCenterIndex] = useState(1);
+  const [isPaused, setIsPaused] = useState(false); // New state to handle hover
 
-  const nextSlide = () => setCenterIndex((prev) => (prev + 1) % testimonials.length);
-  const prevSlide = () => setCenterIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  // Wrapped in useCallback so it can be used inside useEffect safely
+  const nextSlide = useCallback(() => {
+    setCenterIndex((prev) => (prev + 1) % testimonials.length);
+  }, []);
 
-  // Helper to get the 3 visible items based on center index
+  const prevSlide = () => {
+    setCenterIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  // Auto-swap logic
+  useEffect(() => {
+    if (isPaused) return; // Don't swap if user is hovering
+
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 4000); // Swaps every 4 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount or index change
+  }, [nextSlide, isPaused, centerIndex]); 
+
   const getVisibleIndices = () => {
     const prev = (centerIndex - 1 + testimonials.length) % testimonials.length;
     const next = (centerIndex + 1) % testimonials.length;
@@ -48,7 +65,6 @@ export default function FocusedCarousel() {
     <section className="py-20 bg-[#FDFCFD] overflow-hidden">
       <div className="container mx-auto px-4">
         
-        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-slate-900 mb-4">Real Stories</h2>
           <p className="text-slate-500 max-w-2xl mx-auto text-sm leading-relaxed">
@@ -57,10 +73,12 @@ export default function FocusedCarousel() {
           </p>
         </div>
 
-        {/* Carousel Container */}
-        <div className="relative flex items-center justify-center gap-4 max-w-6xl mx-auto">
+        <div 
+          className="relative flex items-center justify-center gap-4 max-w-6xl mx-auto"
+          onMouseEnter={() => setIsPaused(true)} // Pause when mouse enters
+          onMouseLeave={() => setIsPaused(false)} // Resume when mouse leaves
+        >
           
-          {/* Left Button */}
           <button 
             onClick={prevSlide}
             className="absolute left-0 z-20 p-3 rounded-full border border-pink-200 text-pink-500 hover:bg-pink-50 transition-colors bg-white shadow-sm md:-left-4"
@@ -68,7 +86,6 @@ export default function FocusedCarousel() {
             <ChevronLeft size={24} />
           </button>
 
-          {/* Cards Wrapper */}
           <div className="flex items-center justify-center gap-6 w-full">
             {visibleIndices.map((idx, position) => {
               const isCenter = position === 1;
@@ -84,24 +101,20 @@ export default function FocusedCarousel() {
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                   className={`bg-white rounded-2xl p-8 border border-slate-100 shadow-xl shadow-slate-200/50 flex flex-col items-center text-center w-full max-w-[350px] min-h-[400px] ${!isCenter && 'hidden md:flex'}`}
                 >
-                  {/* Profile Image */}
                   <div className="w-24 h-24 rounded-full overflow-hidden mb-6 border-4 border-slate-50 shadow-inner">
                     <img src={testimonials[idx].image} alt={testimonials[idx].name} className="w-full h-full object-cover" />
                   </div>
 
-                  {/* Stars */}
                   <div className="flex gap-1 mb-6">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} size={18} className="fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
 
-                  {/* Feedback */}
                   <p className="text-slate-600 text-base leading-relaxed mb-8 flex-grow">
                     {testimonials[idx].feedback}
                   </p>
 
-                  {/* Footer */}
                   <div className="mt-auto">
                     <span className="font-bold text-slate-800 text-lg">
                       — {testimonials[idx].name}, {testimonials[idx].location}
@@ -112,7 +125,6 @@ export default function FocusedCarousel() {
             })}
           </div>
 
-          {/* Right Button */}
           <button 
             onClick={nextSlide}
             className="absolute right-0 z-20 p-3 rounded-full bg-purple-600 text-white hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200 md:-right-4"
@@ -121,7 +133,6 @@ export default function FocusedCarousel() {
           </button>
         </div>
 
-        {/* Pagination Dots */}
         <div className="flex justify-center gap-2 mt-12">
           {testimonials.map((_, i) => (
             <button

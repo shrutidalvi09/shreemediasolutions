@@ -12,9 +12,7 @@ export default function Services() {
       <div className="relative">
         <ServicesHero />
         {/* Absolute positioning to pull categories onto the blue wave */}
-        <div className="relative -mt-28 z-40">
-          <ServiceCategories />
-        </div>
+        
       </div>
 
       <ProjectShowcase />
