@@ -1,101 +1,108 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Lock, ArrowRight, PlayCircle, Github, Chrome } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { User, Lock, Chrome, Facebook, Github, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
 
 export default function Login() {
-  const navigate = useNavigate();
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+  };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB] flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Background Decoration - High-end Blur Blobs */}
-      <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-indigo-100/40 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-blue-100/40 rounded-full blur-[120px]" />
-      </div>
-
+    <div className="min-h-screen bg-[#E9F0FF] flex items-center justify-center p-4 font-sans">
+      {/* Reduced max-width and min-height for a smaller footprint */}
       <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full max-w-[460px] bg-white rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] border border-slate-100 p-10 md:p-14 z-10"
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="w-full max-w-[850px] bg-white rounded-[2.5rem] shadow-[0_30px_80px_-15px_rgba(0,0,0,0.08)] flex flex-col md:flex-row overflow-hidden min-h-[520px]"
       >
-        {/* Brand Identity */}
-        <div className="flex flex-col items-center mb-12">
-          <div className="p-4 bg-indigo-600 rounded-[1.25rem] mb-6 shadow-xl shadow-indigo-200">
-            <PlayCircle className="text-white w-7 h-7" />
-          </div>
-          <h2 className="text-3xl font-black text-slate-900 tracking-tight">Welcome Back</h2>
-          <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mt-3">Access your professional dashboard</p>
-        </div>
+        
+        {/* Left Section: Compact Curved Panel */}
+        <div className="relative w-full md:w-[38%] bg-[#7B96EC] flex flex-col items-center justify-center text-center px-8 py-10 text-white order-2 md:order-1">
+          
 
-        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-          {/* Email Field */}
-          <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Email Address</label>
-            <div className="relative group">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-indigo-600 transition-colors w-4.5 h-4.5" />
-              <input 
-                type="email" 
-                placeholder="name@company.com"
-                className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-medium focus:outline-none focus:ring-4 focus:ring-indigo-600/5 focus:border-indigo-600 focus:bg-white transition-all placeholder:text-slate-300"
-              />
-            </div>
-          </div>
-
-          {/* Password Field */}
-          <div className="space-y-2">
-            <div className="flex justify-between items-center px-1">
-              <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Password</label>
-              <Link to="/forgot-password" title="Recover Password" className="text-[10px] font-black uppercase tracking-widest text-indigo-600 hover:text-slate-900 transition-colors">
-                Forgot?
-              </Link>
-            </div>
-            <div className="relative group">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-indigo-600 transition-colors w-4.5 h-4.5" />
-              <input 
-                type="password" 
-                placeholder="••••••••"
-                className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-medium focus:outline-none focus:ring-4 focus:ring-indigo-600/5 focus:border-indigo-600 focus:bg-white transition-all placeholder:text-slate-300"
-              />
-            </div>
-          </div>
-
-          {/* Submit Button */}
-          <motion.button 
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full py-4.5 bg-slate-900 text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.25em] hover:bg-indigo-600 transition-all shadow-2xl shadow-slate-200 mt-4 flex items-center justify-center gap-3"
+          <motion.div 
+            initial={{ opacity: 0, x: -15 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="relative z-10"
           >
-            Sign In <ArrowRight size={18} strokeWidth={3} />
-          </motion.button>
-        </form>
+            <h1 className="text-3xl font-bold mb-3 tracking-tight">Hello, Welcome!</h1>
+            <p className="text-blue-50/90 text-xs mb-8 font-medium">Don't have an account?</p>
+            
+            <Link 
+              to="/signup" 
+              className="px-10 py-2.5 border-2 border-white/80 rounded-xl font-bold text-[11px] uppercase tracking-widest hover:bg-white hover:text-[#7B96EC] transition-all duration-300"
+            >
+              Register
+            </Link>
+          </motion.div>
+        </div>
 
-        {/* Divider */}
-        <div className="relative my-10 text-center">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-slate-100"></div>
+        {/* Right Section: Compact Login Form */}
+        <div className="w-full md:w-[62%] bg-white p-8 md:p-12 flex flex-col justify-center order-1 md:order-2">
+          
+          <div className="max-w-[320px] mx-auto w-full">
+            <motion.h2 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-3xl font-bold text-slate-800 mb-8 text-center"
+            >
+              Login
+            </motion.h2>
+
+            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <motion.div variants={fadeInUp} initial="hidden" animate="visible" className="relative group">
+                <input 
+                  type="text" 
+                  placeholder="Username"
+                  className="w-full px-5 py-3.5 bg-[#F0F5FF] border-none rounded-xl text-sm text-slate-600 placeholder:text-slate-400 focus:ring-2 focus:ring-[#7B96EC]/20 focus:bg-white transition-all outline-none"
+                />
+                <User className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-[#7B96EC] w-4 h-4 transition-colors" />
+              </motion.div>
+
+              <motion.div variants={fadeInUp} initial="hidden" animate="visible" className="relative group">
+                <input 
+                  type="password" 
+                  placeholder="Password"
+                  className="w-full px-5 py-3.5 bg-[#F0F5FF] border-none rounded-xl text-sm text-slate-600 placeholder:text-slate-400 focus:ring-2 focus:ring-[#7B96EC]/20 focus:bg-white transition-all outline-none"
+                />
+                <Lock className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-[#7B96EC] w-4 h-4 transition-colors" />
+              </motion.div>
+
+              <div className="text-center">
+                <Link to="/forgot-password" className="text-[11px] font-bold text-slate-400 hover:text-[#7B96EC] transition-colors">
+                  Forgot Password?
+                </Link>
+              </div>
+
+              <motion.button 
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.99 }}
+                className="w-full py-3.5 bg-[#7B96EC] text-white rounded-xl font-bold text-[14px] shadow-lg shadow-blue-100 hover:bg-[#6A85D9] transition-all"
+              >
+                Login
+              </motion.button>
+            </form>
+
+            <div className="mt-8 text-center">
+              <p className="text-slate-400 text-[10px] font-bold mb-4 uppercase tracking-widest opacity-70">or login with social platforms</p>
+              <div className="flex items-center justify-center gap-3">
+                {[Chrome, Facebook, Github, Linkedin].map((Icon, i) => (
+                  <motion.a
+                    key={i}
+                    href="#"
+                    whileHover={{ y: -2 }}
+                    className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-50 text-slate-400 hover:text-[#7B96EC] hover:bg-slate-50 transition-all shadow-sm"
+                  >
+                    <Icon size={18} />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
           </div>
-          <span className="relative px-5 bg-white text-[9px] font-black text-slate-300 uppercase tracking-[0.2em]">Secure Gateway</span>
         </div>
-
-        {/* Social Logins */}
-        <div className="grid grid-cols-2 gap-4">
-          <button className="flex items-center justify-center gap-3 py-3.5 border border-slate-100 rounded-2xl hover:bg-slate-50 hover:border-slate-200 transition-all text-[10px] font-black uppercase tracking-wider text-slate-600 active:scale-95">
-            <Chrome size={16} /> Google
-          </button>
-          <button className="flex items-center justify-center gap-3 py-3.5 border border-slate-100 rounded-2xl hover:bg-slate-50 hover:border-slate-200 transition-all text-[10px] font-black uppercase tracking-wider text-slate-600 active:scale-95">
-            <Github size={16} /> Github
-          </button>
-        </div>
-
-        {/* Footer Link */}
-        <p className="text-center mt-12 text-slate-400 text-[11px] font-bold tracking-tight">
-          New to the platform? 
-          <Link to="/signup" className="text-indigo-600 ml-2 hover:text-slate-900 underline underline-offset-4 decoration-indigo-200 hover:decoration-slate-900 transition-all">
-            Create Account
-          </Link>
-        </p>
       </motion.div>
     </div>
   );
