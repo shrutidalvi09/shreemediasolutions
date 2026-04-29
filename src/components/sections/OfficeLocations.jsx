@@ -36,7 +36,7 @@ export default function OfficeLocations() {
             <a
               href={ CONTACT_PHONE_HREF }
               { ...EXTERNAL_PHONE_LINK_PROPS }
-              className="group relative inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-blue-700 to-red-500 rounded-full text-white font-bold overflow-hidden transition-all hover:shadow-xl hover:scale-105"
+              className="group relative inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-blue-700 to-blue-500 rounded-full text-white font-bold overflow-hidden transition-all hover:shadow-xl hover:scale-105"
             >
               <Phone size={18} className="group-hover:rotate-12 transition-transform" />
               <span>Schedule a call</span>

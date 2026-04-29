@@ -174,7 +174,7 @@ export default function AboutPreview() {
             </div>
 
             <button className="group flex items-center gap-4 bg-slate-950 text-white px-10 py-5 rounded-full font-bold hover:bg-indigo-600 transition-all duration-500 shadow-2xl shadow-indigo-100">
-              Explore Portfolio
+              Explore Products
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </button>
           </div>

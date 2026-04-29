@@ -76,7 +76,7 @@ export default function Hero() {
             transition={{ delay: 0.3 }}
           >
             <button className="group relative px-10 py-5 bg-[#7C3AED] hover:bg-[#6D28D9] text-white rounded-full font-bold text-sm shadow-xl shadow-purple-200 transition-all flex items-center gap-3 active:scale-95">
-              Explore Our Portfolio
+              Explore Our Products
               <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
               <div className="absolute inset-0 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>

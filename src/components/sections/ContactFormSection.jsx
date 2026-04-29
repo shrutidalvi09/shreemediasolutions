@@ -9,8 +9,8 @@ import {
 } from '../../data/contact';
 
 const SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbyZUAkK5DwzE7YIewqcU8-fFVYpuuxi1vWN5OZoOlHXh3dlk8O9aFgFOEFxg1welnA/exec';
-const GOOGLE_MAPS_URL = 'https://share.google/RKny5NxiMcvYVkEFo';
+  '';
+const GOOGLE_MAPS_URL = '';
 
 export default function ContactFormSection() {
   const [ formData, setFormData ] = useState({ name: '', email: '', message: '' });
@@ -69,7 +69,7 @@ export default function ContactFormSection() {
           <div className="lg:w-[40%] w-full bg-white p-14 rounded-sm shadow-[0_0_50px_rgba(0,0,0,0.04)] border border-slate-50 relative overflow-hidden">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 mb-8">
               <MessageSquare size={ 14 } className="text-blue-600" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Let's work together</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Let's work </span>
             </div>
 
             <h3 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">Ready to help you!</h3>
@@ -94,12 +94,7 @@ export default function ContactFormSection() {
                   { CONTACT_EMAIL }
                 </a>
               </div>
-              <div>
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Join growing team?</p>
-                <a href={ CONTACT_EMAIL_HREF } className="font-bold text-slate-900 hover:text-blue-600 transition-colors">
-                  { CONTACT_EMAIL }
-                </a>
-              </div>
+              
               <div>
                 <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Visit headquarters?</p>
                 <a

@@ -14,10 +14,10 @@ export default function TechMarquee() {
         {[...items, ...items].map((text, i) => (
           <span 
             key={i} 
-            className="text-6xl font-black uppercase tracking-tighter text-transparent"
+            className="text-6xl font-white uppercase tracking-tighter "
             style={{ WebkitTextStroke: '1px rgba(255,255,255,0.1)' }}
           >
-            {text} <span className="ml-20 opacity-20">/</span>
+            {text} <span className="ml-5 opacity-10">/</span>
           </span>
         ))}
       </motion.div>

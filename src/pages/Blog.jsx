@@ -6,6 +6,7 @@ import Newsletter from '../components/sections/Newsletter';
 const Blog = () => {
   return (
     <main className="bg-white min-h-screen">
+      
       {/* 1. HERO SECTION */}
       <BlogHero />
       

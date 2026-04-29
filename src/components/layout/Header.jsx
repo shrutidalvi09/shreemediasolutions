@@ -12,8 +12,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 const navLinks = [
   { to: '/', label: 'Home' },
-  { to: '/services', label: 'Services', hasDropdown: true },
-  { to: '/portfolio', label: 'Portfolio', hasDropdown: true },
+  { to: '/services', label: 'Products'},
   { to: '/blog', label: 'Blog' },
   { to: '/contact', label: 'Contact' },
 ]
@@ -94,12 +93,7 @@ export default function IntegratedHeader() {
 
         {/* 3. CTA Cluster */}
         <div className="flex items-center gap-4">
-          <button className={`hidden sm:flex items-center gap-2 text-[12px] font-bold tracking-widest transition-colors ${
-            scrolled ? 'text-white/40 hover:text-white' : 'text-slate-400 hover:text-slate-900'
-          }`}>
-            <Globe className="w-4 h-4" />
-            EN
-          </button>
+          
 
           <Link 
             to="/get-started" 
@@ -109,7 +103,7 @@ export default function IntegratedHeader() {
                 : 'bg-indigo-600 text-white hover:bg-slate-900 shadow-lg shadow-indigo-200'
             }`}
           >
-            Get Started
+            Login
           </Link>
 
           <button 
