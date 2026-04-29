@@ -7,7 +7,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
-import Careers from './pages/Careers';
+import Blog from './pages/Blog';
 
 // Helper component to force scroll to top on every route change
 function ScrollToTop() {
@@ -37,7 +37,7 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/careers" element={<Careers />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </main>
       <Footer />

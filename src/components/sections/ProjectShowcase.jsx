@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Plus } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // Added for navigation
 
 // --- DIRECT ASSET IMPORTS ---
 import imgWedding from '../../assets/weeding.jpg';
@@ -32,22 +33,19 @@ const projects = [
   { id: 6, title: "Executive Business Card", tag: "Featured", price: "₹350.00", qty: "100", img: imgBusinessCard },
   { id: 7, title: "Promotional Flyer", tag: "Bulk", price: "₹800.00", qty: "500", img: imgFlyer },
   { id: 8, title: "Trifold Brochure", tag: "Marketing", price: "₹1,200.00", qty: "100", img: imgBrochure },
-  { id: 9, title: "Event Poster A3/A4", tag: "Visual", price: "₹45.00", qty: "1", img: imgPoster },
   { id: 10, title: "Achievement Certificates", tag: "Popular", price: "₹299.00", qty: "5", img: imgCert },
-  { id: 11, title: "B&W / Color Xerox", tag: "Services", price: "₹2.00", qty: "1", img: imgXerox },
   { id: 12, title: "PVC Employee ID Card", tag: "Essential", price: "₹60.00", qty: "1", img: imgIdCard },
   { id: 13, title: "Outdoor Vinyl Banner", tag: "Large Format", price: "₹450.00", qty: "1", img: imgBanner },
   { id: 14, title: "Roll-up Standy (6x3)", tag: "Featured", price: "₹1,399.00", qty: "1", img: imgStandy },
-  { id: 15, title: "Custom Product Boxes", tag: "Packaging", price: "₹1,500.00", qty: "50", img: imgBoxes },
   { id: 16, title: "Round Product Stickers", tag: "Labels", price: "₹110.00", qty: "30", img: imgStickers },
-  { id: 17, title: "Paper Carry Bags", tag: "Eco-Friendly", price: "₹400.00", qty: "100", img: imgCarryBag },
-  { id: 18, title: "Hardbound Thesis", tag: "Binding", price: "₹450.00", qty: "1", img: imgThesis },
   { id: 19, title: "Restaurant Menu Cards", tag: "Hospitality", price: "₹850.00", qty: "10", img: imgMenu }
 ];
 
 const filters = ['All', 'Cards', 'Marketing', 'Office', 'Large Format', 'Packaging'];
 
 export default function ProjectShowcase() {
+  const navigate = useNavigate(); // Hook for navigation
+
   return (
     <section className="py-24 bg-[#F8F9FB]">
       <div className="container mx-auto px-6">
@@ -64,7 +62,6 @@ export default function ProjectShowcase() {
             </p>
           </div>
           
-          {/* Scrollable Filter Bar */}
           <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
             {filters.map((filter) => (
               <button 
@@ -83,7 +80,7 @@ export default function ProjectShowcase() {
             <motion.div 
               key={item.id}
               whileHover={{ y: -10 }}
-              className="bg-white rounded-[2rem] border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.03)] overflow-hidden group transition-all duration-500 hover:shadow-2xl"
+              className="bg-white rounded-[2rem] border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.03)] overflow-hidden group transition-all duration-500 hover:shadow-2xl flex flex-col"
             >
               {/* Image Container */}
               <div className="relative aspect-square p-8 bg-slate-50/50 flex items-center justify-center overflow-hidden">
@@ -100,32 +97,33 @@ export default function ProjectShowcase() {
                   alt={item.title} 
                   className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
-                
-                <div className="absolute inset-0 bg-indigo-600 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500" />
               </div>
 
               {/* Product Content */}
-              <div className="p-6 space-y-5">
-                <h3 className="font-bold text-slate-800 text-[15px] leading-tight h-10 line-clamp-2 transition-colors duration-300 group-hover:text-indigo-600">
+              <div className="p-6 flex flex-col flex-1">
+                <h3 className="font-bold text-slate-800 text-[15px] leading-tight mb-4 h-10 line-clamp-2 transition-colors duration-300 group-hover:text-indigo-600">
                   {item.title}
                 </h3>
                 
-                <div className="flex justify-between items-end pt-4 border-t border-slate-50">
-                  <div className="space-y-1.5">
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em]">
-                      From {item.qty} {item.qty > 1 ? 'Units' : 'Unit'}
-                    </p>
-                    <p className="text-slate-900 font-black text-2xl tracking-tighter leading-none">
-                      {item.price}
-                    </p>
+                <div className="mt-auto space-y-4 pt-4 border-t border-slate-50">
+                  <div className="flex justify-between items-end">
+                    <div className="space-y-1">
+                      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+                        Min. {item.qty} {item.qty > 1 ? 'Units' : 'Unit'}
+                      </p>
+                      <p className="text-slate-900 font-black text-2xl tracking-tighter leading-none">
+                        {item.price}
+                      </p>
+                    </div>
                   </div>
-                  
-                  {/* Action Button */}
+
+                  {/* Redesigned Button: Action-oriented navigation */}
                   <motion.button 
-                    whileTap={{ scale: 0.9 }}
-                    className="w-11 h-11 bg-slate-900 text-white rounded-2xl flex items-center justify-center group-hover:bg-indigo-600 transition-all duration-300 shadow-xl shadow-slate-100"
+                    onClick={() => navigate('/contact')} // Redirects to Contact
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full py-3.5 bg-slate-900 group-hover:bg-indigo-600 text-white rounded-xl flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 shadow-xl shadow-slate-100"
                   >
-                    <Plus size={22} strokeWidth={2.5} />
+                    Get Quote <ArrowRight size={14} strokeWidth={3} className="group-hover:translate-x-1 transition-transform" />
                   </motion.button>
                 </div>
               </div>
