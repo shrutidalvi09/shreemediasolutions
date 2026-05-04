@@ -14,8 +14,7 @@ createRoot(document.getElementById('root')).render(
         v7_relativeSplatPath: true,
       }}
     >
-  <CartProvider>  
-
+     <CartProvider>  
       <App />
     </CartProvider>
 
