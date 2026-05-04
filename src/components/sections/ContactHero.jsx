@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import heroImg from "../../assets/contact.jpg";
+import heroImg from "../../assets/CONTACT2.jpg";
 
 export default function ContactHero() {
   return (
@@ -29,18 +29,18 @@ export default function ContactHero() {
             >
               {/* Heading */}
               <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight mb-4">
-                Ideas That <br /> Drive Growth
+              Reach Out.<br />Connect.
               </h1>
 
               {/* Subtitle */}
               <p className="text-slate-200 text-lg mb-6">
-                Insights on design, development, and digital marketing to help your business scale smarter.
+              Based in India, serving brands globally. We are just a message away from starting your next media transformation.
               </p>
 
               {/* CTA */}
-              <button className="px-6 py-3 bg-white text-slate-900 rounded-full font-semibold hover:bg-slate-200 transition">
+              {/*<button className="px-6 py-3 bg-white text-slate-900 rounded-full font-semibold hover:bg-slate-200 transition">
                 Explore Articles
-              </button>
+              </button>*/}
             </motion.div>
 
           </div>

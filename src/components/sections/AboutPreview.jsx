@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-// 1. ASSET IMPORTS (Ensure these paths match your project structure)
+// ASSETS
 import qualityGif from '../../assets/quality.gif'; 
 import truckGif from '../../assets/truck.gif'; 
 import supportGif from '../../assets/support.gif'; 
@@ -45,9 +45,9 @@ export default function AboutPreview() {
   }, []);
 
   return (
-    <section className="relative py-32 bg-[#fcfcfd] overflow-hidden selection:bg-indigo-100 selection:text-indigo-600">
-      
-      {/* BACKGROUND AMBIENCE */}
+    <section className="relative py-32 bg-[#fcfcfd] overflow-hidden">
+
+      {/* Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <motion.div 
           animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
@@ -58,166 +58,124 @@ export default function AboutPreview() {
       </div>
 
       <div className="container mx-auto px-6 lg:px-20 relative z-10">
-        
-        {/* --- SECTION HEADER --- */}
+
+        {/* HEADER */}
         <div className="max-w-5xl mb-24">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4 mb-8"
-          >
+          <div className="flex items-center gap-4 mb-8">
             <span className="h-[1px] w-12 bg-indigo-500" />
             <span className="text-indigo-600 font-black tracking-[0.3em] text-[10px] uppercase">
               The Shree Media Standard
             </span>
-          </motion.div>
-          
-          <div className="overflow-hidden">
-            <motion.h2 
-              initial={{ y: "100%" }}
-              whileInView={{ y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-              className="text-5xl md:text-[5rem] font-black text-slate-900 leading-[1.1] tracking-tighter"
-            >
-              We craft <span className="italic font-light text-slate-400 underline decoration-indigo-500/20 underline-offset-8">physical assets</span> <br /> 
-              that define your <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500">brand legacy.</span>
-            </motion.h2>
           </div>
+
+          <h2 className="text-5xl md:text-[5rem] font-black text-slate-900 leading-[1.1] tracking-tighter">
+            We craft <span className="italic font-light text-slate-400 underline decoration-indigo-500/20 underline-offset-8">physical assets</span><br/> 
+            that define your <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500">brand legacy.</span>
+          </h2>
         </div>
 
-        {/* --- FEATURE GRID --- */}
+        {/* FEATURES */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40">
-          <FeatureItem 
-            icon={qualityGif} 
-            title="Bespoke Quality" 
-            desc="Meticulous attention to every fiber and pixel." 
-            delay={0.1} 
-          />
-          <FeatureItem 
-            icon={truckGif} 
-            title="Rapid Delivery" 
-            desc="Global logistics powered by local precision." 
-            delay={0.2} 
-          />
-          <FeatureItem 
-            icon={supportGif} 
-            title="Design Logic" 
-            desc="Strategic consulting for modern visual brands." 
-            delay={0.3} 
-          />
+          <FeatureItem icon={qualityGif} title="Bespoke Quality" desc="Meticulous attention to every fiber and pixel." />
+          <FeatureItem icon={truckGif} title="Rapid Delivery" desc="Global logistics powered by local precision." />
+          <FeatureItem icon={supportGif} title="Design Logic" desc="Strategic consulting for modern visual brands." />
         </div>
 
-        {/* --- SHOWCASE & STATS --- */}
-        <div className="flex flex-col lg:flex-row gap-20 items-center">
-          
-          {/* Slideshow with Studio-Style Frame */}
-          <div className="lg:w-3/5 w-full relative">
-            <div className="relative aspect-[16/10] rounded-[3rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.08)] bg-white border-[8px] border-white">
+        {/* MAIN SECTION */}
+        <div className="flex flex-col lg:flex-row gap-20 items-stretch">
+
+          {/* LEFT IMAGE */}
+          <div className="flex-1 flex">
+            <div className="relative w-full h-full min-h-[500px] lg:min-h-full rounded-[3rem] overflow-hidden shadow-xl bg-white border-[8px] border-white">
+
               <AnimatePresence mode="wait">
                 <motion.img
                   key={index}
                   src={slides[index].img}
-                  initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
-                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
-                  transition={{ duration: 0.8, ease: "circOut" }}
-                  className="absolute inset-0 w-full h-full object-cover rounded-[1.5rem]"
-                  alt="Portfolio Showcase"
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.8 }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  alt="Portfolio"
                 />
               </AnimatePresence>
 
-              {/* Floating Glass Tag */}
-              <motion.div 
-                key={`label-${index}`}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="absolute top-8 left-8 bg-white/70 backdrop-blur-xl px-6 py-3 rounded-2xl shadow-xl border border-white/50 z-20"
-              >
-                <p className="text-[9px] font-black uppercase tracking-widest text-indigo-600 mb-0.5">Category</p>
-                <p className="text-sm font-bold text-slate-800">{slides[index].label}</p>
-              </motion.div>
+              {/* Label */}
+              <div className="absolute top-8 left-8 bg-white/80 backdrop-blur px-6 py-3 rounded-2xl shadow">
+                <p className="text-xs text-indigo-600 uppercase">Category</p>
+                <p className="font-bold">{slides[index].label}</p>
+              </div>
 
-              {/* Progress Dots */}
-              <div className="absolute bottom-8 right-8 flex gap-3 z-20">
+              {/* Dots */}
+              <div className="absolute bottom-8 right-8 flex gap-2">
                 {slides.map((_, i) => (
                   <button 
                     key={i}
                     onClick={() => setIndex(i)}
-                    className={`h-1.5 rounded-full transition-all duration-500 ${i === index ? "w-10 bg-indigo-600" : "w-2 bg-slate-900/10 hover:bg-slate-900/30"}`}
+                    className={`h-2 rounded-full transition-all ${
+                      i === index ? "w-8 bg-indigo-600" : "w-2 bg-gray-300"
+                    }`}
                   />
                 ))}
               </div>
+
             </div>
           </div>
 
-          {/* Text Content & Stats */}
-          <div className="lg:w-2/5 space-y-12">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <h3 className="text-4xl font-black text-slate-900 tracking-tight leading-tight">
-                High-fidelity results <br /> 
+          {/* RIGHT CONTENT */}
+          <div className="flex-1 flex flex-col justify-between">
+
+            <div className="space-y-8">
+              <h3 className="text-4xl font-black text-slate-900">
+                High-fidelity results <br/> 
                 for <span className="text-indigo-600">high-impact</span> brands.
               </h3>
-              <p className="text-slate-500 text-xl leading-relaxed font-medium">
-                Our workshop is a sanctuary for quality. We bridge the gap between digital concepts and tangible masterpieces.
+
+              <p className="text-slate-500 text-lg">
+                Our workshop bridges digital ideas into real-world premium prints with unmatched precision.
               </p>
-            </motion.div>
+            </div>
 
-            <div className="grid grid-cols-2 gap-8 border-t border-slate-100 pt-10">
-  <StatBox count="99%" label="Accuracy" />
-  <StatBox count="15k+" label="Deliveries" />
-</div>
+            <div>
+              <div className="grid grid-cols-2 gap-8 border-t pt-8">
+                <StatBox count="99%" label="Accuracy" />
+                <StatBox count="15k+" label="Deliveries" />
+              </div>
 
-{/* Added mt-10 for vertical gap and inline-block to ensure the Link wraps the button correctly */}
-<Link title="Explore Our Products" to="/services" className="inline-block mt-10">
-  <button className="group flex items-center gap-4 bg-slate-950 text-white px-10 py-5 rounded-full font-bold hover:bg-indigo-600 transition-all duration-500 shadow-2xl shadow-indigo-100">
-    Explore Products
-    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-  </button>
-</Link>
-            
+              <Link to="/services" className="inline-block mt-10">
+                <button className="flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full hover:bg-indigo-600 transition">
+                  Explore Products
+                  <ArrowRight size={18} />
+                </button>
+              </Link>
+            </div>
+
           </div>
         </div>
+
       </div>
     </section>
   );
 }
 
-// Sub-component for Features
-function FeatureItem({ icon, title, desc, delay }) {
+/* Feature */
+function FeatureItem({ icon, title, desc }) {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay }}
-      whileHover={{ y: -10 }}
-      className="p-12 bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_80px_rgba(99,102,241,0.08)] transition-all duration-700 relative overflow-hidden group"
-    >
-      <div className="relative z-10">
-        <div className="mb-10 w-20 h-20 rounded-3xl bg-slate-50 flex items-center justify-center group-hover:bg-indigo-600 group-hover:rotate-[10deg] transition-all duration-500 shadow-inner">
-          <img src={icon} alt={title} className="w-10 h-10 object-contain group-hover:brightness-0 group-hover:invert transition-all duration-500" />
-        </div>
-        <h4 className="text-2xl font-black text-slate-800 mb-4 tracking-tight">{title}</h4>
-        <p className="text-slate-400 text-base leading-relaxed font-medium">{desc}</p>
-      </div>
-      <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-indigo-50 rounded-full group-hover:scale-[3] transition-transform duration-1000 -z-0" />
-    </motion.div>
+    <div className="p-10 bg-white rounded-3xl shadow hover:shadow-xl transition">
+      <img src={icon} className="w-12 mb-6" alt={title} />
+      <h4 className="text-xl font-bold mb-2">{title}</h4>
+      <p className="text-gray-500">{desc}</p>
+    </div>
   );
 }
 
-// Sub-component for Stats
+/* Stats */
 function StatBox({ count, label }) {
   return (
-    <div className="space-y-1">
-      <p className="text-4xl font-black text-slate-900 tracking-tighter">{count}</p>
-      <p className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">{label}</p>
+    <div>
+      <p className="text-3xl font-bold">{count}</p>
+      <p className="text-xs uppercase text-indigo-500">{label}</p>
     </div>
   );
 }

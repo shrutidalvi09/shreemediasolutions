@@ -12,6 +12,8 @@ import Services from './pages/Services';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
+import Cart from "./pages/Cart"; 
+
 
 // --- AUTH PAGES IMPORT ---
 import Login from './components/layout/Login';   // Ensure the filename is Login.jsx
@@ -56,6 +58,8 @@ export default function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           {/* Optional: Redirect "/get-started" to login if you still use that link elsewhere */}
           <Route path="/get-started" element={<Login />} />
+          <Route path="/cart" element={<Cart />} />
+
         </Routes>
       </main>
 

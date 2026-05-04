@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import heroImg from "../../assets/blogpage.webp";
+import heroImg from "../../assets/SERVICEPAPER.jpg";
 
 export default function ServicesHero() {
   return (
@@ -19,8 +19,8 @@ export default function ServicesHero() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
         {/* 🔹 Content */}
-        <div className="relative z-10 h-full flex items-center">
-          <div className="px-6 md:px-12">
+        <div className="relative z-20 h-full flex items-center">
+          <div className="px-8 md:px-12">
 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -28,14 +28,13 @@ export default function ServicesHero() {
               className="max-w-lg text-white"
             >
               {/* Heading */}
-              <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight mb-4">
-                Ideas That <br /> Drive Growth
+              <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight mb-2">
+                Tangible Solutions<br /> 
               </h1>
 
               {/* Subtitle */}
               <p className="text-slate-200 text-lg mb-6">
-                Insights on design, development, and digital marketing to help your business scale smarter.
-              </p>
+From corporate identity kits to bespoke event stationery, we provide high-fidelity printing services that turn your brand's vision into a tactile reality.              </p>
 
               {/* CTA */}
              
